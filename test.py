@@ -1,0 +1,3 @@
+# create a game
+for i in range(10):
+    print("Hola Mundo")
