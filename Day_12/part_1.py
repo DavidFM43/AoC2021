@@ -22,20 +22,15 @@ def build_path(path, links, paths):
     current = path[-1]
 
     if current == "end":
-
         paths.append(path)
         return path
 
     options = links[current]
 
     for option in options:
-
         if option.isupper():
-
             build_path(path + [option], links, paths)
-
         if option.islower() and option not in path:
-
             build_path(path + [option], links, paths)
 
     if current == "start":

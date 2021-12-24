@@ -16,7 +16,6 @@ def solve(input):
         links[tail] = links.get(tail, []) + [head]
 
     paths = build_path(["start"], links, [], False)
-
     return len(paths)
 
 
@@ -27,7 +26,6 @@ def build_path(path, links, paths, revisited):
     current = path[-1]
 
     if current == "end":
-
         paths.append(path)
         return path
 
@@ -36,17 +34,13 @@ def build_path(path, links, paths, revisited):
     for option in options:
 
         if option.isupper():
-
             build_path(path + [option], links, paths, revisited)
 
         elif option.islower() and option not in path:
-
             build_path(path + [option], links, paths, revisited)
 
         elif option.islower() and revisited == False and option != "start":
-
             build_path(path + [option], links, paths, True)
 
     if current == "start":
-        
         return paths
