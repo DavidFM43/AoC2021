@@ -16,7 +16,7 @@ def solve(input):
 
 
     for i in range(steps):
-        octo_map, flashed = step(octo_map)
+        flashed = step(octo_map)
         flash_count += len(flashed)
 
     return flash_count
@@ -33,12 +33,12 @@ def step(octo_map):
         for j in range(1, ncols-1):
 
             if octo_map[i][j] + 1 > 9:
-                octo_map = flash(octo_map, i, j, flashed)
+                flash(octo_map, i, j, flashed)
             else:
                 if (i,j) not in flashed:
                     octo_map[i][j] += 1
 
-    return octo_map, flashed
+    return flashed
 
 
 def flash(octo_map, i, j, flashed):
@@ -54,8 +54,6 @@ def flash(octo_map, i, j, flashed):
             
             if (h, v) != (i, j) and (h, v) not in flashed:
                 if octo_map[h][v] + 1 > 9:
-                    octo_map = flash(octo_map, h, v, flashed)
+                    flash(octo_map, h, v, flashed)
                 else:
                     octo_map[h][v] += 1
-
-    return octo_map
