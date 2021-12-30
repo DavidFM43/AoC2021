@@ -2,22 +2,25 @@ from heapq import heappop, heappush
 
 
 def solve(input):
-
+    """
+    dijkstra algorithm using priority queue
+    """
     matrix = [list(map(int,[num for num in row])) for row in input]
     n_rows = len(matrix)
     n_cols = len(matrix[0])
+    # weights dic
     weights = {}
     for y in range(n_rows):
         for x in range(n_cols):
             weights[(x, y)] = matrix[y][x]
-
+    #distances dic
     distances = {}
     inf = float("inf")
     for x, y in weights.keys():
         distances[(x,y)] = inf
     distances[(0, 0)]  = 0 
+    # distance priority queue
     pq = [(0, (0, 0))]
-
     while pq:
         distance, node = heappop(pq)
         if distance > distances[node]:
