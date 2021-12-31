@@ -3,7 +3,7 @@ from heapq import heappop, heappush
 
 def solve(input):
     """
-    dijkstra algorithm using priority queue
+    dijkstra's single source shortest path algorithm using min heap.
     """
     matrix = [list(map(int,[num for num in row])) for row in input]
     n_rows = len(matrix)
@@ -22,8 +22,8 @@ def solve(input):
     # distance priority queue
     pq = [(0, (0, 0))]
     while pq:
-        distance, node = heappop(pq)
-        if distance > distances[node]:
+        current_distance, node = heappop(pq)
+        if current_distance > distances[node]:
             continue
         x, y = node 
         H = [x,x,x+1,x-1]
@@ -31,7 +31,7 @@ def solve(input):
         for x_2, y_2 in zip(H,V):
             if 0 <= x_2 < n_cols and 0 <= y_2 < n_rows:
                 v = weights[(x_2, y_2)]
-                alt = distance + v
+                alt = current_distance + v
                 if alt < distances[(x_2, y_2)]:
                     distances[(x_2, y_2)] = alt
                     heappush(pq, (alt, (x_2, y_2)))
