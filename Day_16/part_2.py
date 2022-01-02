@@ -21,7 +21,6 @@ def process_packet(packet):
             bin += "".join(info[:4])
             info = info[4:]
         num = int(bin, 2)
-
         return info, num
     # operator packet
     else:

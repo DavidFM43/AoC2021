@@ -9,7 +9,6 @@ def process_packet(packet):
     version = int("".join(packet[:3]), 2)
     id = int("".join(packet[3:6]), 2)
     info = packet[6:]
-    # print("".join(packet), version, id)
     global counter
     counter += version
     # literal packet
@@ -29,7 +28,6 @@ def process_packet(packet):
         length_id = info.pop(0)
         if length_id == '0':
             total_length = int("0b"+"".join(info[:15]), 2)
-            # print("total_length: {}".format(total_length))
             info = info[15:]
             to_process = info[:total_length]
             while to_process:
@@ -37,7 +35,6 @@ def process_packet(packet):
             return info[total_length:]
         else:
             num_packets = int("0b"+"".join(info[:11]), 2)
-            # print("num_packets: {}".format(num_packets))
             to_process = info[11:]
             for _ in range(num_packets):
                 to_process = process_packet(to_process)

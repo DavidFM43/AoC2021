@@ -1,4 +1,8 @@
 def solve(input):
+    """
+    for each initial velocity [x, y] checks if it misses the target, if it does not, 
+    takes the maximum vertical position and compares.
+    """
     global target
     target = input.strip().split()
     tmax = -1
@@ -13,6 +17,10 @@ def solve(input):
     return tmax 
 
 def sim(vel):
+    """
+    Simulates the shot given the initial velocity. 
+    Returns boolean "missed" and the list of positions.
+    """
     x0, x1 = tuple(map(int, target[2][2:-1].split("..")))
     y0, y1 = tuple(map(int, target[3][2:].split("..")))
     pos = [0, 0]
@@ -29,6 +37,9 @@ def sim(vel):
     return missed, positions
 
 def step(vel, pos):
+    """
+    Simulates one step of the shot.
+    """
     x, y = pos
     new_pos = [x+vel[0], y+vel[1]]
     # drag(since it's always moving right, drag decreases x)
