@@ -16,7 +16,7 @@ def main():
 
     print(part_1.solve(input))
 
-    # print(part_2.solve(input))
+    print(part_2.solve(input))
 
 
 if __name__ == "__main__":
