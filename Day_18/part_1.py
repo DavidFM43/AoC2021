@@ -2,7 +2,7 @@ from ast import literal_eval
 from math import ceil, floor
 
 
-def solve(input):
+def solve(input) -> int:
     count = literal_eval(input[0])
     for num in input[1:]:
         n2 = literal_eval(num)
@@ -29,7 +29,7 @@ def get_children(pair) -> list:
     return [get_children(pair.l), get_children(pair.r)]
 
 
-def get_height(tree):
+def get_height(tree) -> int:
     if type(tree) == Pair:
         h1 = get_height(tree.l) + 1
         h2 = get_height(tree.r) + 1
@@ -44,7 +44,7 @@ def magnitude(pair) -> int:
     return 3*magnitude(pair.l) + magnitude(pair.r)*2
 
 
-def add(p1, p2):
+def add(p1, p2) -> Pair:
     sum = Pair(None, [p1, p2])
     sum.l.parent = sum
     sum.r.parent = sum
@@ -52,7 +52,7 @@ def add(p1, p2):
     return sum
 
 
-def reduce(pair):
+def reduce(pair) -> None:
     while True:
         if get_height(pair) >= 4:
             nested = find_nested(pair)
@@ -66,7 +66,7 @@ def reduce(pair):
             break
 
 
-def find_nested(pair):
+def find_nested(pair) -> Pair:
     h = get_height(pair)
     if h == 0:
         return pair
@@ -110,7 +110,7 @@ def set_childref(y, val, l_ref):
         y.r = val
 
 
-def change_adj(pair, change_pred):
+def change_adj(pair, change_pred) -> None:
     """
     change_pred=True changes the predecessor and change_pred=False changes successor
     """
@@ -134,7 +134,7 @@ def change_adj(pair, change_pred):
                          parent_ref, dir_pointer)
 
 
-def explode(pair):
+def explode(pair) -> None:
     change_adj(pair, True)
     change_adj(pair, False)
     if pair == get_childref(pair.parent, True):
@@ -143,7 +143,7 @@ def explode(pair):
         set_childref(pair.parent, 0, False)
 
 
-def split(parent, index):
+def split(parent, index) -> None:
     is_left = not bool(index)
     num = get_childref(parent, is_left)
     x = floor(num/2)
