@@ -147,17 +147,6 @@ def all_scan(scanner, pivot):
         pivot = roll(turn(roll(pivot)))
 
 
-def all_rot(p):
-    for _ in range(2):
-        for r in range(3):
-            p = roll(p)
-            yield (p)
-            for t in range(3):
-                p = turn(p)
-                yield (p)
-        p = roll(turn(roll(p)))
-
-
 def parse(input) -> list:
     scanners = []
     input = [x.split("\n") for x in input.split("\n\n")]

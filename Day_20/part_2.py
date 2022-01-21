@@ -1,6 +1,7 @@
 import sys
 sys.setrecursionlimit(10000)
 
+
 def solve(input):
     input = input.split("\n\n")
     algo = input[0]
@@ -9,7 +10,7 @@ def solve(input):
     runs = 50
     for it in range(1, runs + 1):
         bg_char = '#' if it % 2 == 0 else '.'
-        lited = run_algo(lited, algo, it, bg_char) 
+        lited = run_algo(lited, algo, it, bg_char)
 
     return len(lited)
 
@@ -37,8 +38,9 @@ def transform(point, lited, visited, nw_lited, algo, limit, bg_char):
         return
 
     for adj in get_adj(point):
-        if adj not in lited:
+        if adj not in lited and adj not in visited:
             transform(adj, lited, visited, nw_lited, algo, limit, bg_char)
+
 
 def check_bounds(point, limit):
     x, y = point
@@ -48,13 +50,14 @@ def check_bounds(point, limit):
         return True
     return False
 
+
 def get_code(point, lited, limit, bg_char):
     code = ""
     for nx, ny in get_adj(point):
         if (nx, ny) in lited:
             code += '#'
         elif check_bounds((nx, ny), limit):
-            code += bg_char 
+            code += bg_char
         else:
             code += '.'
     return code
@@ -89,5 +92,3 @@ def get_lited(image):
                 coord = (x, y)
                 lited.add(coord)
     return lited
-
-
