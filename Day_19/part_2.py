@@ -3,7 +3,7 @@ from copy import deepcopy
 
 
 def solve(input):
-    scanners, num_beacons = parse(input)
+    scanners = parse(input)
 
     scan_distances = [0 for x in range(len(scanners))]
     for idx in range(len(scanners)):
@@ -16,7 +16,7 @@ def solve(input):
     return max_distance(positions)
 
 
-def compare_against(scanners, s0: set, idx0: int, pos, processed, scan_distances):
+def compare_against(scanners: list, s0: set, idx0: int, pos: tuple, processed: set, scan_distances: list):
     # compares s0 against all other scanners
     positions = set()
     for idx1 in range(len(scanners)):
@@ -27,27 +27,29 @@ def compare_against(scanners, s0: set, idx0: int, pos, processed, scan_distances
             if new_s1 != None:
                 scan_distances[idx1] = compute_distances(new_s1)
                 scanners[idx1] = new_s1
+
                 new_pos = add(pos, offset)
                 positions.add(new_pos)
                 processed.append(new_s1)
+
                 positions.update(compare_against(
                     scanners, new_s1, idx1, new_pos, processed, scan_distances))
     return positions
 
 
-def compare_scanners(s1: set, idx1: int, s2: set, idx2: int, pos1, scan_distances, scanners):
+def compare_scanners(s0: set, idx0: int, s1: set, idx1: int, pos0, scan_distances: list, scanners: list):
     """
     Returns the position of s2 relative to s1 if they overlap, else returns None
     """
-    p = check_overlap(idx1, idx2, scan_distances, scanners)
+    p = check_overlap(idx0, idx1, scan_distances, scanners)
     if p != None:
-        p1 = p[0]
+        p0 = p[0]
         pivot = p[1]
-        for s, new_p in all_scan(s2, pivot):
-            offset = get_offset(p1, new_p)
-            ovlap = compare_points(new_p, offset, s1, s)
+        for s, new_p in all_scan(s1, pivot):
+            offset = substract(p0, new_p)
+            ovlap = compare_points(offset, s0, s)
             if len(ovlap) == 12:
-                corrected_beacons = {add(add(x, pos1), offset) for x in s}
+                corrected_beacons = {add(add(x, pos0), offset) for x in s}
                 return s, offset, corrected_beacons
     return None, -1, -1
 
@@ -69,19 +71,19 @@ def mahtattan_distance(a, b):
     return abs(x1-x2) + abs(y1-y2) + abs(z1-z2)
 
 
-def check_overlap(idx1: int, idx2: int, scan_distances, scanners):
+def check_overlap(idx0: int, idx1: int, scan_distances: list, scanners: list):
+    d0 = scan_distances[idx0]
     d1 = scan_distances[idx1]
-    d2 = scan_distances[idx2]
+    s0 = scanners[idx0]
     s1 = scanners[idx1]
-    s2 = scanners[idx2]
-    for x in s1:
-        for y in s2:
-            v = d1[x].intersection(d2[y])
+    for x in s0:
+        for y in s1:
+            v = d0[x].intersection(d1[y])
             if len(v) == 11:
                 return x, y
 
 
-def compare_points(pivot, offset, s1, s2):
+def compare_points(offset, s1, s2):
     ovlap = set()
     for p2 in s2:
         p2 = add(p2, offset)
@@ -112,7 +114,7 @@ def add(a, b):
     return tuple([sum(x) for x in zip(a, b)])
 
 
-def get_offset(a, b):
+def substract(a, b):
     x1, y1, z1 = a
     x2, y2, z2 = b
     return(x1-x2, y1-y2, z1-z2)
@@ -168,7 +170,6 @@ def all_rot(p):
 
 
 def parse(input) -> list:
-    count = 0
     scanners = []
     input = [x.split("\n") for x in input.split("\n\n")]
     for chunk in input:
@@ -177,6 +178,5 @@ def parse(input) -> list:
             if beacon:
                 beacon = tuple(map(int, beacon.split(",")))
                 scanner.add(beacon)
-                count += 1
         scanners.append(scanner)
-    return scanners, count
+    return scanners

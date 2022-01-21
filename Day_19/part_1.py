@@ -50,11 +50,11 @@ def compare_scanners(s1: set, idx1: int, s2: set, idx2: int, pos1,
         p1 = p[0]
         pivot = p[1]
         for s, new_p in all_scan(s2, pivot):
-            offset = get_offset(p1, new_p)
-            ovlap = compare_points(new_p, offset, s1, s)
+            offset = substract(p1, new_p)
+            ovlap = compare_points(offset, s1, s)
             if len(ovlap) == 12:
                 corrected_beacons = {add(add(x, pos1), offset) for x in s}
-                return s, offset, corrected_beacons,
+                return s, offset, corrected_beacons
     return None, -1, -1
 
 
@@ -68,7 +68,7 @@ def check_overlap(idx1: int, idx2: int, scan_distances, scanners):
                 return x, y
 
 
-def compare_points(pivot, offset, s1, s2):
+def compare_points(offset, s1, s2):
     ovlap = set()
     for p2 in s2:
         p2 = add(p2, offset)
@@ -99,7 +99,7 @@ def add(a, b):
     return tuple([sum(x) for x in zip(a, b)])
 
 
-def get_offset(a, b):
+def substract(a, b):
     x1, y1, z1 = a
     x2, y2, z2 = b
     return (x1 - x2, y1 - y2, z1 - z2)
