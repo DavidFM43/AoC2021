@@ -1,5 +1,5 @@
 from itertools import product
-from functools import lru_cache
+from functools import lru_cache 
 
 
 def solve(input):
@@ -14,6 +14,7 @@ def turn(pos, score, roll):
     return new_pos, new_score
 
 
+# @cache = @lru_cache(maxzise=None) available in 3.9 onwards
 @lru_cache(maxsize=None)
 def game(player, pos1, pos2, score1, score2):
 
