@@ -11,19 +11,21 @@ def solve(input):
         scan_distances[idx] = compute_distances(scanner)
 
     s0 = scanners[0]
-    positions = compare_against(
-        scanners, s0, 0, (0, 0, 0), [s0], scan_distances)
+    positions = compare_against(scanners, s0, 0, (0, 0, 0), [s0], scan_distances)
     return max_distance(positions)
 
 
-def compare_against(scanners: list, s0: set, idx0: int, pos: tuple, processed: set, scan_distances: list):
+def compare_against(
+    scanners: list, s0: set, idx0: int, pos: tuple, processed: set, scan_distances: list
+):
     # compares s0 against all other scanners
     positions = set()
     for idx1 in range(len(scanners)):
         s1 = scanners[idx1]
         if s1 not in processed:
             new_s1, offset, corrected_beacons = compare_scanners(
-                s0, idx0, s1, idx1, pos, scan_distances, scanners)
+                s0, idx0, s1, idx1, pos, scan_distances, scanners
+            )
             if new_s1 != None:
                 scan_distances[idx1] = compute_distances(new_s1)
                 scanners[idx1] = new_s1
@@ -32,12 +34,17 @@ def compare_against(scanners: list, s0: set, idx0: int, pos: tuple, processed: s
                 positions.add(new_pos)
                 processed.append(new_s1)
 
-                positions.update(compare_against(
-                    scanners, new_s1, idx1, new_pos, processed, scan_distances))
+                positions.update(
+                    compare_against(
+                        scanners, new_s1, idx1, new_pos, processed, scan_distances
+                    )
+                )
     return positions
 
 
-def compare_scanners(s0: set, idx0: int, s1: set, idx1: int, pos0, scan_distances: list, scanners: list):
+def compare_scanners(
+    s0: set, idx0: int, s1: set, idx1: int, pos0, scan_distances: list, scanners: list
+):
     """
     Returns the position of s2 relative to s1 if they overlap, else returns None
     """
@@ -68,7 +75,7 @@ def max_distance(positions):
 def mahtattan_distance(a, b):
     x1, y1, z1 = a
     x2, y2, z2 = b
-    return abs(x1-x2) + abs(y1-y2) + abs(z1-z2)
+    return abs(x1 - x2) + abs(y1 - y2) + abs(z1 - z2)
 
 
 def check_overlap(idx0: int, idx1: int, scan_distances: list, scanners: list):
@@ -107,7 +114,7 @@ def compute_distances(scanner):
 def distance(a, b):
     x1, y1, z1 = a
     x2, y2, z2 = b
-    return math.sqrt((x1-x2)**2 + (y1-y2)**2 + (z1-z2)**2)
+    return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2 + (z1 - z2) ** 2)
 
 
 def add(a, b):
@@ -117,11 +124,15 @@ def add(a, b):
 def substract(a, b):
     x1, y1, z1 = a
     x2, y2, z2 = b
-    return(x1-x2, y1-y2, z1-z2)
+    return (x1 - x2, y1 - y2, z1 - z2)
 
 
-def turn(p): return (p[0], p[2], -p[1])
-def roll(p): return (-p[1], p[0], p[2])
+def turn(p):
+    return (p[0], p[2], -p[1])
+
+
+def roll(p):
+    return (-p[1], p[0], p[2])
 
 
 def roll_scan(scanner, pivot=(0, 0, 0)):

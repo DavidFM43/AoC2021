@@ -1,6 +1,6 @@
 def solve(input):
-    """ uses a stack to match closing brackets with most recent open brackets"""
-    
+    """uses a stack to match closing brackets with most recent open brackets"""
+
     open_brackets = "{[(<"
     errors_scores = [1197, 57, 3, 25137]
     closing_brackets = "}])>"
@@ -12,7 +12,7 @@ def solve(input):
 
         for bracket in sequence:
 
-            if bracket in open_brackets: 
+            if bracket in open_brackets:
                 open_stack.append(bracket)
 
             else:
@@ -24,5 +24,5 @@ def solve(input):
                 else:
                     counter += errors_scores[bracket_index]
                     break
-                    
+
     return counter

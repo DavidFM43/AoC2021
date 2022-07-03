@@ -11,13 +11,11 @@ def solve(input):
         scan_distances[idx] = compute_distances(scanner)
 
     s0 = scanners[0]
-    s0.update(compare_against(scanners, s0, 0, (0, 0, 0), [s0],
-                              scan_distances))
+    s0.update(compare_against(scanners, s0, 0, (0, 0, 0), [s0], scan_distances))
     return len(s0)
 
 
-def compare_against(scanners, s0: set, idx0: int, pos, processed,
-                    scan_distances):
+def compare_against(scanners, s0: set, idx0: int, pos, processed, scan_distances):
     """
     compares s0 against all other scanners
     """
@@ -26,7 +24,8 @@ def compare_against(scanners, s0: set, idx0: int, pos, processed,
         s1 = scanners[idx1]
         if s1 not in processed:
             new_s1, offset, corrected_beacons = compare_scanners(
-                s0, idx0, s1, idx1, pos, scan_distances, scanners)
+                s0, idx0, s1, idx1, pos, scan_distances, scanners
+            )
             # new_s1 == None when there's no overlap
             if new_s1 != None:
                 scan_distances[idx1] = compute_distances(new_s1)
@@ -35,13 +34,16 @@ def compare_against(scanners, s0: set, idx0: int, pos, processed,
                 processed.append(new_s1)
                 beacons.update(corrected_beacons)
                 beacons.update(
-                    compare_against(scanners, new_s1, idx1, new_pos, processed,
-                                    scan_distances))
+                    compare_against(
+                        scanners, new_s1, idx1, new_pos, processed, scan_distances
+                    )
+                )
     return beacons
 
 
-def compare_scanners(s1: set, idx1: int, s2: set, idx2: int, pos1,
-                     scan_distances, scanners):
+def compare_scanners(
+    s1: set, idx1: int, s2: set, idx2: int, pos1, scan_distances, scanners
+):
     """
     Returns the position of s2 relative to s1 if they overlap, else returns None
     """
@@ -92,7 +94,7 @@ def compute_distances(scanner):
 def distance(a, b):
     x1, y1, z1 = a
     x2, y2, z2 = b
-    return math.sqrt((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2)
+    return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2 + (z1 - z2) ** 2)
 
 
 def add(a, b):

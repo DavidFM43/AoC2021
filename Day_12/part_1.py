@@ -1,5 +1,5 @@
 def solve(input):
-    """ recursively builds each path. 
+    """recursively builds each path.
     when a path is completed it is added to the paths list, wich is passed by reference in each recursive call"""
     links = {}
     for link in input:

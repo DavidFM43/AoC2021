@@ -32,6 +32,7 @@ def check_ranges(ranges):
             return False
         else:
             return True
+
     for coord in ranges:
         p, q = coord
         if not check_bounds(p, q):
@@ -43,7 +44,7 @@ def coords_ranges(coords):
     x1, x2 = coords[0]
     y1, y2 = coords[1]
     z1, z2 = coords[2]
-    return (range(x1, x2+1), range(y1, y2+1), range(z1, z2+1))
+    return (range(x1, x2 + 1), range(y1, y2 + 1), range(z1, z2 + 1))
 
 
 def process_coords(raw):

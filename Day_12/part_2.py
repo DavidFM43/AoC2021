@@ -2,7 +2,7 @@ from copy import deepcopy
 
 
 def solve(input):
-    """ recursively builds each path. 
+    """recursively builds each path.
     when a path is completed it is added to the paths list, wich is passed by reference in each recursive call"""
     links = {}
     for link in input:
@@ -16,7 +16,7 @@ def solve(input):
 
 
 def build_path(path, links, paths, revisited):
-    """ revisited argument is passed by value so the condition is independent of the path."""
+    """revisited argument is passed by value so the condition is independent of the path."""
     revisited = deepcopy(revisited)
     current = path[-1]
     if current == "end":

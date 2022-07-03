@@ -1,5 +1,5 @@
 def solve(input):
-    """ Checks if the number of flashes on a step is equal to the total of positions"""
+    """Checks if the number of flashes on a step is equal to the total of positions"""
 
     steps = 100
     octo_map = []
@@ -14,7 +14,6 @@ def solve(input):
     octo_map.insert(0, sentinel)
     octo_map.append(sentinel)
 
-
     i = 1
     while True:
 
@@ -25,30 +24,30 @@ def solve(input):
 
 
 def step(octo_map):
-    """ simulates one step"""
+    """simulates one step"""
 
     flashed = []
     nrows = len(octo_map)
     ncols = len(octo_map[0])
 
-    for i in range(1, nrows-1):
-        for j in range(1, ncols-1):
+    for i in range(1, nrows - 1):
+        for j in range(1, ncols - 1):
 
             if octo_map[i][j] + 1 > 9:
                 flash(octo_map, i, j, flashed)
             else:
-                if (i,j) not in flashed:
+                if (i, j) not in flashed:
                     octo_map[i][j] += 1
 
     return flashed
 
 
 def flash(octo_map, i, j, flashed):
-    """ sets the position to 0, increases the surrounding positions by 1 and does the necessary new flashes"""
-    
+    """sets the position to 0, increases the surrounding positions by 1 and does the necessary new flashes"""
+
     octo_map[i][j] = 0
-    H = [i-1,i,i+1]
-    V = [j-1,j,j+1]
+    H = [i - 1, i, i + 1]
+    V = [j - 1, j, j + 1]
     flashed.append((i, j))
 
     for h in H:

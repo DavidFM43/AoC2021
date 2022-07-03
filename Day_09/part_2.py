@@ -1,5 +1,5 @@
 def get_basin_size(height_map, i, j, memo):
-    """ recursively check if the neighbors are part of the basin"""
+    """recursively check if the neighbors are part of the basin"""
 
     if height_map[i][j] >= 9:
         return 0
@@ -7,19 +7,19 @@ def get_basin_size(height_map, i, j, memo):
     memo.append((i, j))
     size = 1
 
-    H = [i+1, i-1, i, i]
-    V = [j, j, j-1, j+1]
+    H = [i + 1, i - 1, i, i]
+    V = [j, j, j - 1, j + 1]
 
     for n, m in zip(H, V):
-        if (n,m) not in memo:
-            size += get_basin_size(height_map,n, m, memo)
+        if (n, m) not in memo:
+            size += get_basin_size(height_map, n, m, memo)
 
-    return size 
+    return size
 
 
 def solve(input):
-    """ finds the lowest points of the map and check the basin size for each point"""
-    
+    """finds the lowest points of the map and check the basin size for each point"""
+
     height_map = []
     lower_sizes = []
     inf = float("inf")
@@ -35,17 +35,17 @@ def solve(input):
     height_map.insert(0, sentinel)
     height_map.append(sentinel)
 
-    for i in range(1, nrows+1):
-        for j in range(1, ncols-1):
+    for i in range(1, nrows + 1):
+        for j in range(1, ncols - 1):
 
-            H = [i+1, i-1, i, i]
-            V = [j, j, j-1, j+1]
+            H = [i + 1, i - 1, i, i]
+            V = [j, j, j - 1, j + 1]
             failed = False
 
             for n, m in zip(H, V):
 
                 if height_map[i][j] < height_map[n][m]:
-                   pass
+                    pass
                 else:
                     failed = True
                     break
@@ -55,6 +55,6 @@ def solve(input):
 
     lower_sizes.sort(reverse=True)
 
-    largest_basins = lower_sizes[0]*lower_sizes[1]*lower_sizes[2]
+    largest_basins = lower_sizes[0] * lower_sizes[1] * lower_sizes[2]
 
-    return largest_basins 
+    return largest_basins

@@ -1,4 +1,5 @@
 import sys
+
 sys.setrecursionlimit(10000)
 
 
@@ -9,7 +10,7 @@ def solve(input):
     lited = get_lited(image)
     runs = 50
     for it in range(1, runs + 1):
-        bg_char = '#' if it % 2 == 0 else '.'
+        bg_char = "#" if it % 2 == 0 else "."
         lited = run_algo(lited, algo, it, bg_char)
 
     return len(lited)
@@ -31,7 +32,7 @@ def transform(point, lited, visited, nw_lited, algo, limit, bg_char):
     code = get_code(point, lited, limit, bg_char)
     idx = int(decode(code), 2)
 
-    if algo[idx] == '#':
+    if algo[idx] == "#":
         nw_lited.add(point)
 
     if check_bounds(point, limit):
@@ -55,11 +56,11 @@ def get_code(point, lited, limit, bg_char):
     code = ""
     for nx, ny in get_adj(point):
         if (nx, ny) in lited:
-            code += '#'
+            code += "#"
         elif check_bounds((nx, ny), limit):
             code += bg_char
         else:
-            code += '.'
+            code += "."
     return code
 
 
@@ -75,10 +76,10 @@ def get_adj(point):
 
 def decode(string):
     def decode_char(char):
-        if char == '#':
-            return '1'
+        if char == "#":
+            return "1"
         else:
-            return '0'
+            return "0"
 
     return "".join(list(map(decode_char, string)))
 
@@ -88,7 +89,7 @@ def get_lited(image):
     for y in range(len(image)):
         for x in range(len(image[0])):
             pix = image[y][x]
-            if pix == '#':
+            if pix == "#":
                 coord = (x, y)
                 lited.add(coord)
     return lited

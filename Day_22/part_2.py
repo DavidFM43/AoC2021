@@ -28,11 +28,17 @@ def count_cores(cores):
     count = 0
     for power, core in cores:
         if power:
-            count += (core[1] - core[0]+1) * \
-                (core[3] - core[2]+1) * (core[5] - core[4]+1)
+            count += (
+                (core[1] - core[0] + 1)
+                * (core[3] - core[2] + 1)
+                * (core[5] - core[4] + 1)
+            )
         else:
-            count -= (core[1] - core[0]+1) * \
-                (core[3] - core[2]+1) * (core[5] - core[4]+1)
+            count -= (
+                (core[1] - core[0] + 1)
+                * (core[3] - core[2] + 1)
+                * (core[5] - core[4] + 1)
+            )
     return count
 
 

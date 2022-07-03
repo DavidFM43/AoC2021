@@ -1,16 +1,16 @@
 def solve(input):
-    """ after the corresponding folds are done, the remaining points are drew on the paper"""
+    """after the corresponding folds are done, the remaining points are drew on the paper"""
 
     input = input.split("\n\n")
     dots = set([tuple(map(int, x.split(","))) for x in input[0].split("\n")])
     folds = [x.split()[2].split("=") for x in input[1].split("\n")]
 
     for ins in folds:
-        dots, max_x, max_y = fold(ins,dots)
+        dots, max_x, max_y = fold(ins, dots)
 
     paper = []
-    for i in range(max_y+1):
-        row = ['_' for x in range(max_x+1)]
+    for i in range(max_y + 1):
+        row = ["_" for x in range(max_x + 1)]
         paper.append(row)
 
     for dot in dots:
@@ -28,8 +28,7 @@ def solve(input):
 
 def fold(ins, dots):
 
-    coord = {"x" : 0,
-             "y" : 1} 
+    coord = {"x": 0, "y": 1}
     axis = coord[ins[0]]
     point = int(ins[1])
     new_dots = set()
@@ -40,7 +39,7 @@ def fold(ins, dots):
 
         if dot[axis] > point:
             dot = list(dot)
-            dot[axis] = 2*point - dot[axis]
+            dot[axis] = 2 * point - dot[axis]
             dot = tuple(dot)
             new_dots.add(dot)
         else:

@@ -1,9 +1,9 @@
-import statistics 
+import statistics
 
 
 def solve(input):
-    """ dismisses corrupted sequences and computes error scores"""
-    
+    """dismisses corrupted sequences and computes error scores"""
+
     open_brackets = "{[(<"
     closing_brackets = "}])>"
     errors_scores = [3, 2, 1, 4]
@@ -17,7 +17,7 @@ def solve(input):
 
         for bracket in sequence:
 
-            if bracket in open_brackets: 
+            if bracket in open_brackets:
                 open_stack.append(bracket)
 
             else:
@@ -34,15 +34,15 @@ def solve(input):
         if corrupted:
             continue
 
-        if open_stack: 
+        if open_stack:
 
             n = len(open_stack)
 
-            for idx in range(n-1,-1,-1):
+            for idx in range(n - 1, -1, -1):
 
                 bracket = open_stack[idx]
                 bracket_index = open_brackets.index(bracket)
-                local_counter *=5
+                local_counter *= 5
                 local_counter += errors_scores[bracket_index]
 
             scores.append(local_counter)

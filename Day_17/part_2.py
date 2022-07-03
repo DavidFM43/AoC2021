@@ -9,7 +9,8 @@ def solve(input):
                 missed, positions = sim(vel)
                 if not missed:
                     counter += 1
-    return counter 
+    return counter
+
 
 def sim(vel):
     x0, x1 = tuple(map(int, target[2][2:-1].split("..")))
@@ -22,14 +23,15 @@ def sim(vel):
         if pos[0] > x1 or pos[1] < y0:
             missed = True
             break
-        elif x0 <= pos[0] <=  x1 and y0 <= pos[1] <= y1:
+        elif x0 <= pos[0] <= x1 and y0 <= pos[1] <= y1:
             missed = False
             break
     return missed, positions
 
+
 def step(vel, pos):
     x, y = pos
-    new_pos = [x+vel[0], y+vel[1]]
+    new_pos = [x + vel[0], y + vel[1]]
     # drag(since it's always moving right, drag decreases x)
     if vel[0] > 0:
         vel[0] -= 1

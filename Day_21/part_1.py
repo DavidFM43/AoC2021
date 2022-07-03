@@ -22,7 +22,7 @@ def game(p1, p2):
         times += 1
         if score1 >= 1000 or score2 >= 1000:
             losser = score2 if score1 >= 1000 else score1
-            return losser * (times*3)
+            return losser * (times * 3)
 
 
 def turn(pos, score, die):
@@ -34,7 +34,7 @@ def turn(pos, score, die):
 
 def toss(current):
     """
-    return (c+1) + (c+2) + (c+3), and c+4 
+    return (c+1) + (c+2) + (c+3), and c+4
     """
     val = 0
     die = count(current)

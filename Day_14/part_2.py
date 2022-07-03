@@ -1,9 +1,9 @@
 def solve(input):
-    """ keeps track of the pairs and their count on each iteration, at the end count the first letter of
+    """keeps track of the pairs and their count on each iteration, at the end count the first letter of
     the pairs so that there's no double count"""
 
     input = input.split("\n\n")
-    polymer = input[0] 
+    polymer = input[0]
     raw_rules = input[1].split("\n")
     steps = 40
     rules = {}
@@ -21,14 +21,14 @@ def solve(input):
 
     count = chars_count(pairs, polymer)
 
-    return count[-1][1] - count[0][1] 
+    return count[-1][1] - count[0][1]
 
 
 def get_pairs(polymer):
     n = len(polymer) - 1
     pairs = {}
     for p in range(n):
-        pair = polymer[p:p+2]
+        pair = polymer[p : p + 2]
         pairs[pair] = pairs.get(pair, 0) + 1
     return pairs
 
@@ -43,10 +43,10 @@ def chars_count(pairs, polymer):
     return counts
 
 
-def step(pairs, rules):    
+def step(pairs, rules):
     new_pairs = {}
     for pair, value in pairs.items():
-        char = rules[pair] 
+        char = rules[pair]
         pair1 = pair[0] + char
         pair2 = char + pair[1]
 

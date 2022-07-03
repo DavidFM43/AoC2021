@@ -1,11 +1,11 @@
 def sort_str(string):
-    """ sorts a string in lexicographic order"""
+    """sorts a string in lexicographic order"""
 
     return "".join(sorted(list(string)))
 
 
 def solve(input):
-    """ builds a dictionary with signal-number pairs"""
+    """builds a dictionary with signal-number pairs"""
 
     counter = 0
 
@@ -19,7 +19,6 @@ def solve(input):
         signal_map = dict()
 
         sorted_signal = sorted(signal, key=lambda x: len(x))
-        
 
         signal_map[sort_str(sorted_signal[0])] = 1
         number_map[1] = sorted_signal[0]
@@ -31,12 +30,10 @@ def solve(input):
         number_map[4] = sorted_signal[2]
 
         signal_map[sort_str(sorted_signal[9])] = 8
-        number_map[8] = sorted_signal[9]  
+        number_map[8] = sorted_signal[9]
 
-        
         len5 = sorted_signal[3:6]
         len6 = sorted_signal[6:9]
-
 
         for num in len5:
             sorted_num = sort_str(num)

@@ -1,5 +1,5 @@
 from itertools import product
-from functools import lru_cache 
+from functools import lru_cache
 
 
 def solve(input):
@@ -23,8 +23,7 @@ def game(player, pos1, pos2, score1, score2):
     elif score2 >= 21:
         return 0, 1
 
-    game_info = {0: (pos1, score1),
-                 1: (pos2, score2)}
+    game_info = {0: (pos1, score1), 1: (pos2, score2)}
 
     other_player = int(not bool(player))
 

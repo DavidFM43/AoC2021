@@ -1,5 +1,5 @@
 def solve(input):
-    
+
     x = 0
     y = 0
 
@@ -14,4 +14,4 @@ def solve(input):
         elif direction == "up":
             y -= int(amount)
 
-    return x * y 
+    return x * y

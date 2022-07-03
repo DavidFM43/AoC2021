@@ -47,7 +47,7 @@ def get_height(tree):
 def magnitude(pair) -> int:
     if type(pair) == int:
         return pair
-    return 3*magnitude(pair.l) + magnitude(pair.r)*2
+    return 3 * magnitude(pair.l) + magnitude(pair.r) * 2
 
 
 def add(p1, p2):
@@ -133,11 +133,11 @@ def change_adj(pair, change_pred):
             y = get_childref(y, dir_pointer)
             while type(get_childref(y, not dir_pointer)) != int:
                 y = get_childref(y, not dir_pointer)
-            set_childref(y, get_childref(y, not dir_pointer) +
-                         parent_ref, not dir_pointer)
+            set_childref(
+                y, get_childref(y, not dir_pointer) + parent_ref, not dir_pointer
+            )
         else:
-            set_childref(y, get_childref(y, dir_pointer) +
-                         parent_ref, dir_pointer)
+            set_childref(y, get_childref(y, dir_pointer) + parent_ref, dir_pointer)
 
 
 def explode(pair):
@@ -152,7 +152,7 @@ def explode(pair):
 def split(parent, index):
     is_left = not bool(index)
     num = get_childref(parent, is_left)
-    x = floor(num/2)
-    y = ceil(num/2)
+    x = floor(num / 2)
+    y = ceil(num / 2)
     pair = Pair(parent, [x, y])
     set_childref(parent, pair, is_left)

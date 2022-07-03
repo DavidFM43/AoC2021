@@ -10,10 +10,10 @@ def solve(input):
 
         if direction == "forward":
             x += int(amount)
-            y += aim * int(amount) 
+            y += aim * int(amount)
         elif direction == "down":
             aim += int(amount)
         elif direction == "up":
             aim -= int(amount)
-            
-    return x * y 
+
+    return x * y
